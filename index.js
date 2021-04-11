@@ -22,7 +22,7 @@ const rainbow = async () => {
     await delayedColorChange("yellow", 2000);
     await delayedColorChange("orange", 2000);
   } catch (error) {
-    return "I don't like fucking red, and won't change color to and after red";
+    return error + ", and won't change color to and after red";
   }
   return "Changing BG color to rainbow";
 };
