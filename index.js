@@ -1,20 +1,16 @@
-const delayedColorChange = (color, delay, doNext) => {
-  setTimeout(() => {
-    document.body.style.backgroundColor = color;
-    doNext && doNext();
-  }, delay);
+const delayedColorChange = (color, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      document.body.style.backgroundColor = color;
+      resolve();
+    }, delay);
+  });
 };
 
-delayedColorChange("red", 2000, () => {
-  delayedColorChange("green", 2000, () => {
-    delayedColorChange("blue", 2000, () => {
-      delayedColorChange("violet", 2000, () => {
-        delayedColorChange("yellow", 2000, () => {
-          delayedColorChange("indigo", 2000, () => {
-            delayedColorChange("orange", 2000);
-          });
-        });
-      });
-    });
-  });
-});
+delayedColorChange("red", 2000)
+  .then(() => delayedColorChange("blue", 2000))
+  .then(() => delayedColorChange("green", 2000))
+  .then(() => delayedColorChange("orange", 2000))
+  .then(() => delayedColorChange("violet", 2000))
+  .then(() => delayedColorChange("indigo", 2000))
+  .then(() => delayedColorChange("yellow", 2000))
