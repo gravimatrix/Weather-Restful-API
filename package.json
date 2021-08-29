@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gravimatrix/Weather-Restful-API#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "request": "^2.88.2"
   }
 }
