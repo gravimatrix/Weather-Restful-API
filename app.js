@@ -1,16 +1,16 @@
 const axios = require("axios");
 
 axios
-  .get("http://api.weatherstack.com/current", {
+  .get("https://api.weatherapi.com/v1/current.json", {
     params: {
-      access_key: "3e8cfdead0dc17e93742f7fa9c9a26b8",
-      query: "Dhenkanal",
-      units: "m",
+      key: "f0d21979439d4c5abba85044212908",
+      q: "Dhenkanal",
+      aqi: "yes",
     },
   })
   .then(function (response) {
     console.log(response.data.current);
   })
   .catch(function (error) {
-    console.log(error);
+    console.log(error.response);
   });
