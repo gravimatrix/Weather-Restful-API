@@ -4,10 +4,22 @@ const path = require("path");
 const app = express();
 
 const publicDirPath = path.join(__dirname, "../public");
-const htmlDirPath = path.join(__dirname, "../public/html");
+
+app.set("view engine", "hbs");
 
 app.use(express.static(publicDirPath));
-app.use(express.static(htmlDirPath));
+
+app.get("/", (req, res) => {
+  res.render("index", { title: "Home Page" });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About Page" });
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact", { title: "Contact Page" });
+});
 
 app.get("/getWeatherData", (req, res) => {
   res.send([
