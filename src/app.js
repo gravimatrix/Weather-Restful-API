@@ -1,35 +1,43 @@
 const express = require("express");
 const path = require("path");
+const forecast = require("./utils/forecast");
 
 const app = express();
 
 const publicDirPath = path.join(__dirname, "../public");
 
-app.set("view engine", "hbs");
-
 app.use(express.static(publicDirPath));
 
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
+  res.sendFile(path.join(__dirname, "../public/html/index.html"));
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { title: "About Page" });
+  res.sendFile(path.join(__dirname, "../public/html/about.html"));
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Contact Page" });
+  res.sendFile(path.join(__dirname, "../public/html/contact.html"));
 });
 
-app.get("/getWeatherData", (req, res) => {
-  res.send([
-    {
-      temp: "45 C",
-    },
-    {
-      temp: "41 C",
-    },
-  ]);
+app.get("/weather", async (req, res) => {
+  if (req.query.city) {
+    try {
+      await forecast
+        .getForecast(req.query.city)
+        .then((response) => {
+          res.send(response);
+        })
+        .catch((error) => {
+          res.send({ error: "couldn't fetch data" });
+        });
+    } catch (error) {
+      res.send({ error: "couldn't fetch data" });
+    }
+    return;
+  }
+
+  res.send({ error: "couldn't fetch data" });
 });
 
 app.listen(3000, () => {
