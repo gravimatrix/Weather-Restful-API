@@ -40,6 +40,6 @@ app.get("/weather", async (req, res) => {
   res.send({ error: "couldn't fetch data" });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server is up on port 3000");
 });
