@@ -2,7 +2,7 @@ console.log("Client side javascript is loaded");
 
 const getWeatherInfo = async (city) => {
   var weatherData;
-  await fetch(`https://gravimatrix-weatherify.herokuapp.com/weather?city=${city}`)
+  await fetch(`/weather?city=${city}`)
     .then((response) => {
       return response.json();
     })

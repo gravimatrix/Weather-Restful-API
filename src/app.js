@@ -41,5 +41,5 @@ app.get("/weather", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log("Server is up on port 3000");
+  console.log("Server is up on port " + process.env.PORT || 5000);
 });
